@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,17 +18,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory() ->count(50)->hasPosts(1)->create();
+        // User::factory() ->count(50)->hasPosts(1)->create();
         
+        Listing::factory(10)->create();
 
         Listing::create([
-                'title' => 'Laravel Senior Developer', 
-                'tags' => 'laravel, javascript',
-                'company' => 'Acme Corp',
-                'location' => 'Boston, MA',
-                'email' => 'email1@email.com',
-                'website' => 'https://www.acme.com',
-                'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?'
+            'title' => 'Laravel Senior Developer', 
+            'tags' => 'laravel, javascript',
+            'company' => 'Acme Corp',
+            'location' => 'Boston, MA',
+            'email' => 'email1@email.com',
+            'website' => 'https://www.acme.com',
+            'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?'
         ]);
 
         Listing::create([
@@ -38,5 +41,13 @@ class DatabaseSeeder extends Seeder
             'website' => 'https://www.starkindustries.com',
             'description' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam minima et illo reprehenderit quas possimus voluptas repudiandae cum expedita, eveniet aliquid, quam illum quaerat consequatur! Expedita ab consectetur tenetur delensiti?'
         ]);
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->timestamps();
+        });
     }
+
 }
